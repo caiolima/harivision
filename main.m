@@ -1,0 +1,1 @@
+readSkeletonDataset('a01_s01_e01_skeleton.txt',@plot_skeleton);
