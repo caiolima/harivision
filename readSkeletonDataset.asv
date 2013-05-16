@@ -1,9 +1,7 @@
-function [toFrames]=sreadSkeletonDataset(file, callback, nFrames, filename)
+function readSkeletonDataset(file, callback, nFrames, filename)
 
 if nargin < 3
     nFrames=0;
-end
-if nargin < 4
     filename='';
 end
 
@@ -38,5 +36,6 @@ for s=1:toFrames
   
     callback(S,s,filename)
     
+    w = waitforbuttonpress;
+    disp
 end
-

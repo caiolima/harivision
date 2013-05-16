@@ -1,9 +1,7 @@
 
 max_action=3
 max_people=10
-max_doc=1
-
-minFrames=100;
+max_doc=20
 
 for i=1:max_doc
     for j=1:max_people
@@ -22,16 +20,13 @@ for i=1:max_doc
             file = sprintf('C:\\Users\\Linder\\Documents\\dataset\\skeletons\\MSRAction3DSkeleton(20joints)\\a%s_s%s_e0%d_skeleton.txt',s_i,s_j,k)
            
             nFrames=readSkeletonDataset(file',@plot_skeleton);
-            if(nFrames>0 && nFrames<minFrames)
-                minFrames=nFrames;
-            end
-           
             
-            disp(sprintf('N of rames:%d\n',nFrames))
+            w = waitforbuttonpress;
+            disp(file);
+            
+            disp(sprintf('N of rames:%d\n',toFrames))
 
         end
     end
 end
-
-disp(sprintf('The min frame qtd is: %d',minFrames))
 
