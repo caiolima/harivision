@@ -1,20 +1,22 @@
-load svm_hoj3d_act1
+load svm_hoj3d
 
 
 result=[];
 
-max_action=3;
+max_action=2;
 max_people=10;
-max_doc=8;
+max_doc=1;
 
 num_frames=40;
 
 path_to_dataset='C:\\Users\\Linder\\Documents\\features_3d_sources\\features_dataset\\hoj3d';
 
-cont=1;
+data=[];
+group=[];
+gIndex=1;
 for i=1:max_doc
     for j=1:max_people
-        for k=3:max_action
+        for k=1:max_action
             s_i=sprintf('0%d',i);
             s_j=sprintf('0%d',j);
             
@@ -29,13 +31,11 @@ for i=1:max_doc
             file = sprintf('%s\\a%s_s%s_e0%d__hoj3d.txt',path_to_dataset,s_i,s_j,k);
             
             if exist(file, 'file')
-                mat=double(generateActionMatrix(file,num_frames));
-                
-                result = [result; svmclassify(svmStruct,mat)];
-                
-                disp(sprintf('a%s_s%s_e0%d: %d\n',s_i,s_j,k,result(cont)));
-                cont=cont+1;
+                data=[data; generateActionMatrix(file,num_frames)];
+                gIndex=gIndex+1;
             end
+            
+            
         end
     end
 end
