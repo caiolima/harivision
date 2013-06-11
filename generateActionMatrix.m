@@ -19,7 +19,7 @@ if(not(mFile==-1))
                 line=fgets(mFile);
                 strIn='';
                 for k=1:dimension(2)
-                    strIn=strcat(strIn,'%d');
+                    strIn=strcat(strIn,'%f');
                 end
                 ActionFrame=[ActionFrame textscan(line, strIn, 'delimiter', ' ')];
                 ActionFrame=cell2mat(ActionFrame);
