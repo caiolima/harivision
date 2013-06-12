@@ -1,8 +1,8 @@
-load boost_jointdist_act2
+load boost_jointdist_act9
 
 result=[];
 
-action=3;
+action=9;
 
 max_sample=3;
 max_people=10;
@@ -10,18 +10,23 @@ max_action=action+7;
 
 num_frames=30;
 
-path_to_dataset='C:\\Users\\ivision\\Documents\\features_dataset\\joint_dist';
+path_to_dataset='C:\\Users\\Linder\\Documents\\features_3d_sources\\features_dataset\\joint_dist';
 
 cont=1;
 testes=[];
 for i=action:max_action
     for j=1:max_people
         for k=3:max_sample
-            s_i=sprintf('0%d',i);
+            
+            auxi=mod(i,20);
+            if(auxi==0)
+                auxi=20;
+            end
+            s_i=sprintf('0%d',auxi);
             s_j=sprintf('0%d',j);
             
-            if(i>9)
-                s_i=sprintf('%d',i);
+            if(auxi>9)
+                s_i=sprintf('%d',auxi);
             end
             
             if(j>9)

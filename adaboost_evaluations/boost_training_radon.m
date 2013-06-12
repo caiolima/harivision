@@ -1,4 +1,4 @@
-ation_num=3
+ation_num=9
 
 max_sample=2;
 max_people=10;
@@ -6,7 +6,7 @@ max_action=ation_num;
 
 num_frames=30;
 
-path_to_dataset='C:\\Users\\ivision\\Documents\\features_dataset\\radon';
+path_to_dataset='C:\\Users\\Linder\\Documents\\features_3d_sources\\features_dataset\\radon';
 
 data=[];
 group=[];

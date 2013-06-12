@@ -1,4 +1,4 @@
-action=3;
+action=9;
 
 max_sample=2;
 max_people=10;
@@ -6,7 +6,7 @@ max_action=action;
 
 num_frames=30;
 
-path_to_dataset='C:\\Users\\ivision\\Documents\\features_dataset\\hoj3d';
+path_to_dataset='C:\\Users\\Linder\\Documents\\features_3d_sources\\features_dataset\\hoj3d';
 
 data=[];
 group=[];
