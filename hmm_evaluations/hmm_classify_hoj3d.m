@@ -1,11 +1,10 @@
-load hmm_hoj3d_act16
+load hmm_hoj3d_actions
 
 result=[];
-action=16;
+actions=[1 5 9 10 16];
 
 max_sample=3;
 max_people=10;
-max_action=action+7;
 
 num_frames=30;
 
@@ -15,9 +14,10 @@ cont=1;
 testes=[];
 groupTeste=[];
 countG=1;
-for i=action:max_action
+for m=1:length(actions)
     for j=1:max_people
         for k=3:max_sample
+            i=actions(m);
             auxi=mod(i,20);
             if(auxi==0)
                 auxi=20;
@@ -37,14 +37,10 @@ for i=action:max_action
             
             if exist(file, 'file')
                 
-                if(countG<=9)
-                    groupTeste=[groupTeste;1];
-                    countG=countG+1;
-                else
-                    groupTeste=[groupTeste;0];
-                    countG=countG+1;
-                end
                 
+                groupTeste=[groupTeste;1];
+                countG=countG+1;
+               
                 mat=double(generateActionMatrix2(file,num_frames));
                 IDX = kmeans(mat,15,'emptyaction','singleton');
                 
