@@ -12,12 +12,15 @@ path_to_dataset='C:\\Users\\Linder\\Documents\\features_3d_sources\\features_dat
 
 cont=1;
 testes=[];
-groupTeste=[];
 countG=1;
+
+
+
 for m=1:length(actions)
     for j=1:max_people
-        for k=3:max_sample
+        for k=1:max_sample
             i=actions(m);
+            
             auxi=mod(i,20);
             if(auxi==0)
                 auxi=20;
@@ -36,16 +39,22 @@ for m=1:length(actions)
             file = sprintf('%s\\a%s_s%s_e0%d__hoj3d.txt',path_to_dataset,s_i,s_j,k);
             
             if exist(file, 'file')
-                
-                
-                groupTeste=[groupTeste;1];
-                countG=countG+1;
                
+                testes=[testes; i];
+                
                 mat=double(generateActionMatrix2(file,num_frames));
                 IDX = kmeans(mat,15,'emptyaction','singleton');
                 
-                mll = dhmm_logprob(IDX',prior2, transmat2, obsmat2);
-                %result = [result; svmclassify(svmStruct,mat)];
+                max_act=dhmm_logprob(IDX',hmm(1).prior, hmm(1).transmat, hmm(1).obsmat);
+                act_pos=1
+                for act_i=2:length(actions)
+                    mll=dhmm_logprob(IDX',hmm(act_i).prior, hmm(act_i).transmat, hmm(act_i).obsmat);
+                   if mll > max_act
+                      max_act=mll;
+                      act_pos=act_i;  
+                   end    
+                end
+                result = [result; act_pos];
                 
                 %disp(sprintf('a%s_s%s_e0%d: %d\n',s_i,s_j,k,result(cont)));
                 %cont=cont+1;
@@ -53,3 +62,8 @@ for m=1:length(actions)
         end
     end
 end
+R=result==testes;
+
+pct_right=sum(R)/length(testes)
+
+
