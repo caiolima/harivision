@@ -1,7 +1,7 @@
-load boost_hoj3d_act9
+load boost_hoj3d_act16
 
 result=[];
-action=9;
+action=16;
 
 max_sample=3;
 max_people=10;
@@ -13,6 +13,8 @@ path_to_dataset='C:\\Users\\Linder\\Documents\\features_3d_sources\\features_dat
 
 cont=1;
 testes=[];
+groupComp=[];
+cont_comp=1;
 for i=action:max_action
     for j=1:max_people
         for k=3:max_sample
@@ -35,6 +37,14 @@ for i=action:max_action
             file = sprintf('%s\\a%s_s%s_e0%d__hoj3d.txt',path_to_dataset,s_i,s_j,k);
             
             if exist(file, 'file')
+                if( i==action )
+                    groupComp=[groupComp;1];
+                else
+                    groupComp=[groupComp;0];
+                end
+                
+                cont_comp=cont_comp+1;
+                
                 mat=double(generateActionMatrix(file,num_frames));
                 
                 testes=[testes;mat];
@@ -49,3 +59,13 @@ end
 
 classificador.train(data,group)
 a = classificador.predict(testes, 'ReturnSum', true);
+
+for i=1:length(a)
+    result=1;
+    if(a(i)<0)
+        result=0;
+    end
+    a(i)=result;
+end
+
+m_result=sum(a==groupComp)/length(a)
